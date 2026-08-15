@@ -216,3 +216,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local Vector Database & Persistent Chunks
+chroma_db/
+data/chroma_db/
+*.chroma
+
+# Application Logs & Temp Files
+*.log
+.DS_Store
+
