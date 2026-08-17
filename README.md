@@ -2,7 +2,7 @@
 
 A source-grounded RAG assistant for analyzing banking documents with page-level citations and evidence-aware answers.
 
-- **Live Application**: Live Demo — (https://banking-document-intelligence.streamlit.app/)
+- **Live Application**: — (https://banking-document-intelligence.streamlit.app/)
 - **Repository**: `https://github.com/your-username/banking-document-intelligence-assistant`
 
 ---
