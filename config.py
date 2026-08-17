@@ -87,11 +87,32 @@ MAX_ADJACENT_CHUNKS = int(os.getenv("MAX_ADJACENT_CHUNKS", 2))
 def get_openai_api_key() -> str:
     """
     Retrieve and validate the OpenAI API key.
-    Raises ValueError if the key is missing.
+    Supports:
+    1. Local development & .env via os.getenv("OPENAI_API_KEY")
+    2. Streamlit Community Cloud deployment via st.secrets["OPENAI_API_KEY"]
+
+    Raises ValueError if the key is missing or is an unreplaced placeholder.
     """
     api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key or api_key.strip() == "your_openai_api_key_here":
+
+    # If not found in environment variables, check Streamlit secrets gracefully
+    if not api_key:
+        try:
+            import streamlit as st
+            if hasattr(st, "secrets") and "OPENAI_API_KEY" in st.secrets:
+                api_key = st.secrets["OPENAI_API_KEY"]
+        except Exception:
+            pass
+
+    invalid_placeholders = {
+        "your_openai_api_key_here",
+        "sk-your-actual-api-key-here",
+        "your-actual-api-key-here",
+        "sk-your_openai_api_key_here",
+    }
+
+    if not api_key or api_key.strip() in invalid_placeholders or not api_key.strip():
         raise ValueError(
-            "OPENAI_API_KEY not found or invalid. Please set your OpenAI API key in a .env file."
+            "OPENAI_API_KEY not found or invalid. Please set your OpenAI API key in a .env file or Streamlit secrets."
         )
     return api_key.strip()
