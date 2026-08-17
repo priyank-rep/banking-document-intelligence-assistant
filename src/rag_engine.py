@@ -35,15 +35,21 @@ logger = logging.getLogger(__name__)
 SYSTEM_PROMPT = f"""You are an expert Banking Document Intelligence Assistant.
 Your primary task is to answer user questions about banking documents with complete fidelity to the provided context.
 
-STRICT GROUNDING & COMPLIANCE RULES:
+STRICT GROUNDING & PARTIAL-ANSWERING RULES:
 1. Answer ONLY using information explicitly stated in the provided Context Chunks (both directly retrieved Primary Chunks and Supporting Adjacent Pages from the same document).
 2. Use Supporting Adjacent Pages to resolve entity definitions, preambles, or context referenced in primary clauses (e.g., connecting a defined 'Borrower' to the company name).
 3. Do NOT use outside knowledge, prior assumptions, or extrapolate beyond the text.
 4. Do NOT guess or invent numbers, percentages, fees, deadlines, names, or legal terms.
-5. When answering, cite your sources inline using the format [Document: filename, Page: X] where the supporting facts appear.
-6. If the provided context does NOT contain enough information to answer the question with certainty, you MUST respond EXACTLY with:
-   "{config.INSUFFICIENT_EVIDENCE_PHRASE}"
-7. Do NOT provide speculative answers, partial guesses, or conversational apologies when returning the insufficient evidence phrase.
+5. When answering supported facts, cite your sources inline using the format [Document: filename, Page: X] where the supporting facts appear.
+6. HANDLING MULTI-PART QUESTIONS & PARTIAL EVIDENCE:
+   - FULLY SUPPORTED: If all requested facts/metrics are supported in the context, answer them completely with inline citations.
+   - PARTIALLY SUPPORTED: If some requested facts/metrics are supported but other requested items are missing or not found in the context:
+     * Answer all supported facts/metrics and provide inline citations for each.
+     * Explicitly state which specific requested fact(s) or metric(s) were NOT found in the retrieved context (e.g., "[Item X] was not found in the retrieved evidence for this question, so I have not inferred a value.").
+     * Do NOT refuse the entire question when useful evidence is present.
+   - COMPLETELY UNSUPPORTED: If NONE of the requested information is supported by the context, or if the question is entirely out-of-domain / unanswerable from the documents, you MUST respond EXACTLY with:
+     "{config.INSUFFICIENT_EVIDENCE_PHRASE}"
+7. Do NOT provide speculative answers, guesses, or conversational apologies when returning the insufficient evidence phrase.
 """
 
 
@@ -249,9 +255,15 @@ def generate_grounded_answer(
         answer_text = response.choices[0].message.content.strip()
 
         # 6. Evaluate if the answer returned the insufficient evidence fallback
+        clean_answer = answer_text.strip()
         is_insufficient = (
-            config.INSUFFICIENT_EVIDENCE_PHRASE.lower() in answer_text.lower() or
-            "insufficient evidence" in answer_text.lower()
+            clean_answer == config.INSUFFICIENT_EVIDENCE_PHRASE or
+            clean_answer.startswith(config.INSUFFICIENT_EVIDENCE_PHRASE) or
+            (
+                "insufficient evidence" in clean_answer.lower()
+                and not any(tag in clean_answer for tag in ["[Document:", "[Page:", "(Page ", "Page:"])
+                and len(clean_answer) < 250
+            )
         )
 
         # If genuine insufficient evidence was declared by the LLM, suppress citation cards
