@@ -1,0 +1,152 @@
+[
+  {
+    "id": "q01",
+    "question": "What is the monthly maintenance fee for Apex Premier Checking, and what balances are required to waive it?",
+    "answerable": true,
+    "expected_source": "apex_bank_fee_schedule.pdf",
+    "expected_page": 1,
+    "required_phrases": ["$25.00", "$5,000"],
+    "expected_answer": "$25.00 monthly fee, waived with $5,000 minimum daily balance or $10,000 combined deposit balance.",
+    "notes": "Direct factual lookup with numeric threshold conditions."
+  },
+  {
+    "id": "q02",
+    "question": "What is the fee charged by Apex Bank for a returned unpaid (NSF) item?",
+    "answerable": true,
+    "expected_source": "apex_bank_fee_schedule.pdf",
+    "expected_page": 1,
+    "required_phrases": ["$0.00"],
+    "expected_answer": "$0.00 (Apex Bank does not charge fees for items returned unpaid).",
+    "notes": "Zero-fee policy check."
+  },
+  {
+    "id": "q03",
+    "question": "What is the daily maximum cap on overdraft paid fees for consumer accounts?",
+    "answerable": true,
+    "expected_source": "apex_bank_fee_schedule.pdf",
+    "expected_page": 1,
+    "required_phrases": ["$102.00"],
+    "expected_answer": "Capped at a maximum of 3 overdraft fees per business day ($102.00 total daily cap at $34.00 per item).",
+    "notes": "Numeric calculation/policy cap."
+  },
+  {
+    "id": "q04",
+    "question": "What is the cutoff time for same-day processing of domestic wire transfers?",
+    "answerable": true,
+    "expected_source": "apex_bank_fee_schedule.pdf",
+    "expected_page": 2,
+    "required_phrases": ["4:30", "eastern"],
+    "expected_answer": "4:30 PM Eastern Time for same-day processing.",
+    "notes": "Operational deadline retrieval."
+  },
+  {
+    "id": "q05",
+    "question": "How much does Apex Bank charge for an outgoing domestic wire transfer initiated via online banking vs branch assisted?",
+    "answerable": true,
+    "expected_source": "apex_bank_fee_schedule.pdf",
+    "expected_page": 2,
+    "required_phrases": ["$20.00", "$35.00"],
+    "expected_answer": "$20.00 for Online Banking and $35.00 for Branch Assisted.",
+    "notes": "Comparative channel fee lookup."
+  },
+  {
+    "id": "q06",
+    "question": "Under the Regulation E disclosure, when will Apex Bank provide provisional credit if an error investigation takes extended time?",
+    "answerable": true,
+    "expected_source": "apex_bank_fee_schedule.pdf",
+    "expected_page": 2,
+    "required_phrases": ["10 business days"],
+    "expected_answer": "If investigation takes more than 10 business days (20 business days for new accounts).",
+    "notes": "Regulatory timeline compliance."
+  },
+  {
+    "id": "q07",
+    "question": "What is the total credit facility limit committed to Meridian Logistics LLC?",
+    "answerable": true,
+    "expected_source": "apex_bank_commercial_loan_agreement.pdf",
+    "expected_page": 1,
+    "required_phrases": ["$5,000,000"],
+    "expected_answer": "Revolving line of credit up to an aggregate principal amount of $5,000,000.00.",
+    "notes": "Entity-specific credit commitment limit."
+  },
+  {
+    "id": "q08",
+    "question": "What is the maturity date of the commercial credit agreement for Meridian Logistics?",
+    "answerable": true,
+    "expected_source": "apex_bank_commercial_loan_agreement.pdf",
+    "expected_page": 1,
+    "required_phrases": ["March 15, 2027"],
+    "expected_answer": "March 15, 2027 (36 months from execution date).",
+    "notes": "Contractual maturity date lookup."
+  },
+  {
+    "id": "q09",
+    "question": "By how much does the interest rate increase upon an Event of Default under the commercial credit agreement?",
+    "answerable": true,
+    "expected_source": "apex_bank_commercial_loan_agreement.pdf",
+    "expected_page": 1,
+    "required_phrases": ["300 basis points"],
+    "expected_answer": "Increases automatically by 300 basis points (3.00% per annum) above the otherwise applicable rate.",
+    "notes": "Default interest margin lookup."
+  },
+  {
+    "id": "q10",
+    "question": "What is the minimum consolidated Debt Service Coverage Ratio (DSCR) requirement for Meridian Logistics, and how often is it measured?",
+    "answerable": true,
+    "expected_source": "apex_bank_commercial_loan_agreement.pdf",
+    "expected_page": 2,
+    "required_phrases": ["1.25:1.00"],
+    "expected_answer": "Not less than 1.25:1.00, measured at the end of each fiscal quarter on a trailing twelve-month (TTM) basis.",
+    "notes": "Financial covenant ratio and frequency."
+  },
+  {
+    "id": "q11",
+    "question": "Are there any prepayment penalties for prepaying SOFR-based advances under the credit facility?",
+    "answerable": true,
+    "expected_source": "apex_bank_commercial_loan_agreement.pdf",
+    "expected_page": 3,
+    "required_phrases": ["without penalty"],
+    "expected_answer": "Borrower may prepay SOFR-based advances at any time without penalty or premium upon 2 business days written notice.",
+    "notes": "Prepayment terms and notice window."
+  },
+  {
+    "id": "q12",
+    "question": "What is the company 401(k) retirement matching percentage for Apex Bank employees?",
+    "answerable": false,
+    "expected_source": null,
+    "expected_page": null,
+    "required_phrases": ["cannot find sufficient evidence"],
+    "expected_answer": "I cannot find sufficient evidence in the uploaded documents to answer this question.",
+    "notes": "Deliberate out-of-domain HR benefit question."
+  },
+  {
+    "id": "q13",
+    "question": "What is the current annual interest rate for a 30-year fixed rate residential mortgage?",
+    "answerable": false,
+    "expected_source": null,
+    "expected_page": null,
+    "required_phrases": ["cannot find sufficient evidence"],
+    "expected_answer": "I cannot find sufficient evidence in the uploaded documents to answer this question.",
+    "notes": "Deliberate out-of-domain residential mortgage question."
+  },
+  {
+    "id": "q14",
+    "question": "What is the annual rental fee for a 10x10 safe deposit box at Apex Bank branches?",
+    "answerable": false,
+    "expected_source": null,
+    "expected_page": null,
+    "required_phrases": ["cannot find sufficient evidence"],
+    "expected_answer": "I cannot find sufficient evidence in the uploaded documents to answer this question.",
+    "notes": "Within-domain banking topic that is not present in the fee schedule."
+  },
+  {
+    "id": "q15",
+    "question": "What are the personal guarantee requirements and credit score minimums for the CEO of Meridian Logistics?",
+    "answerable": false,
+    "expected_source": null,
+    "expected_page": null,
+    "required_phrases": ["cannot find sufficient evidence"],
+    "expected_answer": "I cannot find sufficient evidence in the uploaded documents to answer this question.",
+    "notes": "Commercial loan detail that is not included in the credit agreement text."
+  }
+]
