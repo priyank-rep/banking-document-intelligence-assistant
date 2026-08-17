@@ -37,8 +37,8 @@ LLM_MODEL = os.getenv("LLM_MODEL", "gpt-5-mini")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
 
 # LLM Generation Parameters
-# Note: GPT-5 mini uses max_completion_tokens and default temperature (1.0)
-LLM_MAX_COMPLETION_TOKENS = int(os.getenv("LLM_MAX_COMPLETION_TOKENS", 2000))
+# Note: GPT-5 mini uses max_completion_tokens (which includes internal reasoning tokens)
+LLM_MAX_COMPLETION_TOKENS = int(os.getenv("LLM_MAX_COMPLETION_TOKENS", 4000))
 
 # Explicit standard response when context is missing or irrelevant
 INSUFFICIENT_EVIDENCE_PHRASE = (

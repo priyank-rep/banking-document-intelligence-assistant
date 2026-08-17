@@ -26,51 +26,78 @@ def extract_page_text_layout_aware(
     footer_margin_pt: float = config.PDF_FOOTER_MARGIN_PT
 ) -> str:
     """
-    Extract text from a PyMuPDF page using layout-aware block sorting and coordinate filtering.
+    Extract text from a PyMuPDF page using layout-aware block sorting, coordinate filtering,
+    and deterministic font-aware symbol glyph remapping (e.g., legacy ITFRupee / Rupee font symbols).
 
-    1. Uses page.get_text("blocks", sort=True) to extract text blocks in natural reading order.
+    1. Uses page.get_text("dict") to inspect bounding boxes and font families.
     2. Filters out repeating header blocks (y1 <= header_margin_pt) and footer blocks (y0 >= page_height - footer_margin_pt).
-    3. Combines remaining body blocks with clean paragraph breaks (\\n\\n).
-    4. Falls back gracefully to standard text if block extraction returns empty on a non-empty page.
+    3. Remaps legacy custom symbol fonts (e.g., ITFRupee 'J', 'I', 'C', 'H' and Rupee '`') to standard Indian Rupee '₹'.
+    4. Combines remaining body blocks in natural reading order with clean paragraph breaks (\\n\\n).
+    5. Falls back gracefully to standard text if dict extraction returns empty on a non-empty page.
     """
     rect = page.rect
     page_height = rect.height
-
-    # Extract sorted blocks: (x0, y0, x1, y1, text, block_no, block_type)
-    blocks = page.get_text("blocks", sort=True)
-    if not blocks:
-        # Fallback to plain get_text if blocks are empty
-        return page.get_text("text").strip()
-
     header_y_limit = header_margin_pt
     footer_y_limit = page_height - footer_margin_pt
 
+    page_dict = page.get_text("dict")
+    raw_blocks = page_dict.get("blocks", [])
+
+    if not raw_blocks:
+        return page.get_text("text").strip()
+
+    # Sort blocks vertically, then horizontally for stable reading order
+    sorted_blocks = sorted(
+        raw_blocks,
+        key=lambda b: (b.get("bbox", (0, 0, 0, 0))[1], b.get("bbox", (0, 0, 0, 0))[0])
+    )
+
     body_blocks = []
-    for b in blocks:
-        # block_type 0 = text, 1 = image
-        if len(b) >= 7 and b[6] != 0:
+    for b in sorted_blocks:
+        # type 0 = text, 1 = image
+        if b.get("type") != 0:
             continue
 
-        x0, y0, x1, y1, text = b[0], b[1], b[2], b[3], b[4]
-        cleaned = text.strip()
-        if not cleaned:
-            continue
-
+        bbox = b.get("bbox", (0, 0, 0, 0))
+        # Coordinate filter for headers and footers
         if filter_headers_footers:
-            # Header check: entire block is within top margin
-            if y1 <= header_y_limit:
+            if bbox[3] <= header_y_limit:
                 continue
-            # Footer check: block starts at or below bottom margin
-            if y0 >= footer_y_limit:
+            if bbox[1] >= footer_y_limit:
                 continue
 
-        body_blocks.append(cleaned)
+        block_lines = []
+        for line in b.get("lines", []):
+            line_parts = []
+            for span in line.get("spans", []):
+                span_text = span.get("text", "")
+                font_name = span.get("font", "").lower()
+
+                # Deterministic Rupee Font Normalization:
+                # Custom legacy fonts (ITFRupee, Rupee) placed the ₹ symbol at ASCII J, I, C, H, or `
+                if "rupee" in font_name:
+                    span_text = "₹ " if span_text.endswith(" ") else "₹"
+
+                line_parts.append(span_text)
+
+            line_str = "".join(line_parts).strip()
+            if line_str:
+                block_lines.append(line_str)
+
+        if block_lines:
+            body_blocks.append("\n".join(block_lines))
 
     if not body_blocks:
-        # Fallback: if coordinate filtering pruned all blocks, preserve unfiltered text blocks
-        unfiltered = [b[4].strip() for b in blocks if len(b) >= 7 and b[6] == 0 and b[4].strip()]
+        # Fallback: if coordinate filtering pruned all blocks, preserve unfiltered text
+        unfiltered = []
+        for b in sorted_blocks:
+            if b.get("type") == 0:
+                for line in b.get("lines", []):
+                    line_str = "".join(s.get("text", "") for s in line.get("spans", [])).strip()
+                    if line_str:
+                        unfiltered.append(line_str)
         if unfiltered:
-            return "\n\n".join(unfiltered)
+            return "\n".join(unfiltered)
         return ""
 
     return "\n\n".join(body_blocks)
