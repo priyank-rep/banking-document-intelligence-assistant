@@ -1,0 +1,121 @@
+{
+  "timestamp": "2026-08-17T11:14:40.839384",
+  "pdf_characteristics": {
+    "filename": "HDFC_FY26.pdf",
+    "file_size_mb": 17.75,
+    "file_size_bytes": 18608098,
+    "total_pages": 629
+  },
+  "text_extraction_quality": {
+    "total_characters": 1835619,
+    "mean_characters_per_page": 2918.3,
+    "median_characters_per_page": 2666,
+    "min_characters_per_page": 0,
+    "max_characters_per_page": 7200,
+    "extractable_percentage": 99.84,
+    "empty_page_count": 1,
+    "empty_pages": [
+      628
+    ],
+    "low_text_page_count": 5,
+    "low_text_pages": [
+      1,
+      625,
+      626,
+      627,
+      629
+    ],
+    "dense_text_page_count": 596
+  },
+  "chunking_behavior": {
+    "total_chunks": 1259,
+    "avg_tokens_per_chunk": 393.1,
+    "median_tokens_per_chunk": 500,
+    "min_tokens_per_chunk": 2,
+    "max_tokens_per_chunk": 500,
+    "pages_with_multiple_chunks_count": 473,
+    "sample_chunks": {
+      "narrative": {
+        "page": 2,
+        "chunk_id": "HDFC_FY26_p2_c0",
+        "token_count": 478,
+        "preview": "Harnessing \nAI in Banking\n\nArtificial Intelligence (AI) is shaping the \nbanking sector globally. Customers \nincreasingly expect banks to anticipate their \nneeds and provide a unified, omnichannel \nexperience across all digital and physical \ntouchpoints. By leveraging advanced \ntechnologies in a structured manner, banks \ncan meet these needs through"
+      },
+      "table": {
+        "page": null,
+        "chunk_id": null,
+        "token_count": null,
+        "preview": null
+      },
+      "numeric_percentage": {
+        "page": 5,
+        "chunk_id": "HDFC_FY26_p5_c0",
+        "token_count": 390,
+        "preview": "OUR PERFORMANCE\n\nKey Financial Highlights\n\n43,64,886\n\nBalance Sheet Size \n(I Cr)\n\n39,10,199\n\nProfit After Tax\n(I Cr)\n\nEarnings Per Share\n(I)\n\nDividend Per Share\n(I)\n\n74,671\n\n15.50^\n\n\uf0db10.9%\n\n\uf0db10.1%\n48.62\n\n74,671\n\n48.62\n\n67,347\n\n15.50^\n\n44.15\n\n11.00\n\n\uf0db11.6%\n43,64,886\n\nFY26\nFY25\n\nFY25\n\nFY26\n\nFY25\nFY26\n\nFY25\nFY26\n\n(^Special Interim Dividend: H2.5 \nand "
+      },
+      "complex_dense": {
+        "page": 234,
+        "chunk_id": "HDFC_FY26_p234_c0",
+        "token_count": 500,
+        "preview": "10 YEAR FINANCIAL HIGHLIGHTS\n\nLEADING THROUGH PERFORMANCE\n\nH Crore\n\n2016-17\n2017-18\n2018-19\n2019-20\n2020-21\n2021-22\n2022-23\n2023-24\n2024-25\n2025-26\n\nInterest income\n69,305.96\n80,241.35\n98,972.05\n1,14,812.65\n1,20,858.23\n1,27,753.12\n1,61,585.54\n2,58,340.58\n3,00,517.04\n3,07,522.07\n\nInterest expense\n36,166.74\n40,146.49\n50,728.83\n58,626.40\n55,978.66\n55,"
+      }
+    }
+  },
+  "metadata_quality": {
+    "source_preserved": true,
+    "page_preserved": true,
+    "chunk_id_preserved": true
+  },
+  "classified_findings": {
+    "critical": [
+      {
+        "category": "Unextracted / Scanned / Image-Only Pages",
+        "impact": "1 pages (0.2%) returned 0 extractable text characters.",
+        "pages": [
+          628
+        ],
+        "severity": "CRITICAL",
+        "explanation": "PyMuPDF text extraction cannot read scanned image pages, charts, infographics, or visual presentation slides without OCR."
+      }
+    ],
+    "moderate": [
+      {
+        "category": "Header & Footer Noise Contamination",
+        "impact": "Detected 15 repeating headers and 2 repeating footers embedded inside chunk texts.",
+        "examples": [
+          "Header: 'LEADERSHIP TEAM' (seen on 5 pages)",
+          "Header: 'MATERIALITY' (seen on 9 pages)",
+          "Header: 'STRATEGY IN ACTION' (seen on 8 pages)"
+        ],
+        "severity": "MODERATE",
+        "explanation": "Repeating headers and footers consume embedding space and can cause vector search to match on boilerplates rather than content."
+      },
+      {
+        "category": "Multi-Column Layout Interweaving",
+        "impact": "Detected 246 pages with high short-line ratios indicative of multi-column or callout box layouts.",
+        "pages": [
+          4,
+          5,
+          7,
+          8,
+          9,
+          20,
+          27,
+          37,
+          38,
+          39
+        ],
+        "severity": "MODERATE",
+        "explanation": "Multi-column layouts can cause text from column A and column B to interleave horizontally depending on bounding box order."
+      }
+    ],
+    "minor": [
+      {
+        "category": "Hyphenated Line-Break Splitting",
+        "impact": "Observed 229 line-break hyphenations (e.g., future-ready).",
+        "severity": "MINOR",
+        "explanation": "Words split across lines with hyphens (e.g. 'manage-\\nment') may not match exact search terms unless normalized."
+      }
+    ]
+  }
+}

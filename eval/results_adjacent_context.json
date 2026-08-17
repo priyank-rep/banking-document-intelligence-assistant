@@ -1,0 +1,546 @@
+{
+  "timestamp": "2026-08-17T10:55:43.411836",
+  "configuration": {
+    "chunk_size": 500,
+    "chunk_overlap": 100,
+    "top_k": 4,
+    "enable_adjacent_context": true,
+    "max_adjacent_chunks": 2,
+    "llm_model": "gpt-5-mini",
+    "embedding_model": "text-embedding-3-small"
+  },
+  "metrics": {
+    "source_hit_rate_pct": 100.0,
+    "page_hit_rate_pct": 100.0,
+    "correct_refusal_rate_pct": 100.0,
+    "answer_match_rate_pct": 86.67,
+    "elapsed_seconds": 84.49
+  },
+  "detailed_results": [
+    {
+      "id": "q01",
+      "question": "What is the monthly maintenance fee for Apex Premier Checking, and what balances are required to waive it?",
+      "answerable": true,
+      "expected_source": "apex_bank_fee_schedule.pdf",
+      "expected_page": 1,
+      "generated_answer": "The monthly maintenance fee for Apex Premier Checking is $25.00. It is waived with a $5,000 minimum daily balance or a $10,000 combined deposit balance [Document: apex_bank_fee_schedule.pdf, Page: 1].",
+      "insufficient_evidence": false,
+      "source_hit": true,
+      "page_hit": true,
+      "refusal_correct": null,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf"
+      ],
+      "retrieved_pages": [
+        1,
+        2,
+        1,
+        2
+      ],
+      "adjacent_pages": [
+        3
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1870,
+        "completion_tokens": 378,
+        "total_tokens": 2248
+      }
+    },
+    {
+      "id": "q02",
+      "question": "What is the fee charged by Apex Bank for a returned unpaid (NSF) item?",
+      "answerable": true,
+      "expected_source": "apex_bank_fee_schedule.pdf",
+      "expected_page": 1,
+      "generated_answer": "The Returned Item (NSF) Fee is $0.00 \u2014 Apex Bank does not charge fees for items returned unpaid [Document: apex_bank_fee_schedule.pdf, Page: 1].",
+      "insufficient_evidence": false,
+      "source_hit": true,
+      "page_hit": true,
+      "refusal_correct": null,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf"
+      ],
+      "retrieved_pages": [
+        1,
+        2,
+        1,
+        3
+      ],
+      "adjacent_pages": [
+        2
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1868,
+        "completion_tokens": 239,
+        "total_tokens": 2107
+      }
+    },
+    {
+      "id": "q03",
+      "question": "What is the daily maximum cap on overdraft paid fees for consumer accounts?",
+      "answerable": true,
+      "expected_source": "apex_bank_fee_schedule.pdf",
+      "expected_page": 1,
+      "generated_answer": "The daily maximum cap on overdraft paid fees is $102.00 (capped at a maximum of 3 overdraft fees per business day) [Document: apex_bank_fee_schedule.pdf, Page: 1].",
+      "insufficient_evidence": false,
+      "source_hit": true,
+      "page_hit": true,
+      "refusal_correct": null,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf"
+      ],
+      "retrieved_pages": [
+        1,
+        2,
+        1,
+        3
+      ],
+      "adjacent_pages": [
+        2
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1865,
+        "completion_tokens": 309,
+        "total_tokens": 2174
+      }
+    },
+    {
+      "id": "q04",
+      "question": "What is the cutoff time for same-day processing of domestic wire transfers?",
+      "answerable": true,
+      "expected_source": "apex_bank_fee_schedule.pdf",
+      "expected_page": 2,
+      "generated_answer": "The cutoff time for same-day processing of domestic wire transfers is 4:30 PM Eastern Time [Document: apex_bank_fee_schedule.pdf, Page: 2].",
+      "insufficient_evidence": false,
+      "source_hit": true,
+      "page_hit": true,
+      "refusal_correct": null,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        1,
+        3,
+        1
+      ],
+      "adjacent_pages": [
+        2
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1866,
+        "completion_tokens": 170,
+        "total_tokens": 2036
+      }
+    },
+    {
+      "id": "q05",
+      "question": "How much does Apex Bank charge for an outgoing domestic wire transfer initiated via online banking vs branch assisted?",
+      "answerable": true,
+      "expected_source": "apex_bank_fee_schedule.pdf",
+      "expected_page": 2,
+      "generated_answer": "Outgoing Domestic Wire (Online Banking): $20.00 per transfer [Document: apex_bank_fee_schedule.pdf, Page: 2].  \nOutgoing Domestic Wire (Branch Assisted): $35.00 per transfer [Document: apex_bank_fee_schedule.pdf, Page: 2].",
+      "insufficient_evidence": false,
+      "source_hit": true,
+      "page_hit": true,
+      "refusal_correct": null,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        1,
+        1,
+        3
+      ],
+      "adjacent_pages": [
+        2
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1870,
+        "completion_tokens": 256,
+        "total_tokens": 2126
+      }
+    },
+    {
+      "id": "q06",
+      "question": "Under the Regulation E disclosure, when will Apex Bank provide provisional credit if an error investigation takes extended time?",
+      "answerable": true,
+      "expected_source": "apex_bank_fee_schedule.pdf",
+      "expected_page": 2,
+      "generated_answer": "I cannot find sufficient evidence in the uploaded documents to answer this question.",
+      "insufficient_evidence": true,
+      "source_hit": true,
+      "page_hit": true,
+      "refusal_correct": null,
+      "answer_match": false,
+      "retrieved_sources": [
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        1,
+        1,
+        3
+      ],
+      "adjacent_pages": [
+        2
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1871,
+        "completion_tokens": 279,
+        "total_tokens": 2150
+      }
+    },
+    {
+      "id": "q07",
+      "question": "What is the total credit facility limit committed to Meridian Logistics LLC?",
+      "answerable": true,
+      "expected_source": "apex_bank_commercial_loan_agreement.pdf",
+      "expected_page": 1,
+      "generated_answer": "The total committed credit facility limit for Meridian Logistics LLC is $5,000,000.00 USD [Document: apex_bank_commercial_loan_agreement.pdf, Page: 1].",
+      "insufficient_evidence": false,
+      "source_hit": true,
+      "page_hit": true,
+      "refusal_correct": null,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_fee_schedule.pdf"
+      ],
+      "retrieved_pages": [
+        1,
+        2,
+        3,
+        2
+      ],
+      "adjacent_pages": [
+        1
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1865,
+        "completion_tokens": 175,
+        "total_tokens": 2040
+      }
+    },
+    {
+      "id": "q08",
+      "question": "What is the maturity date of the commercial credit agreement for Meridian Logistics?",
+      "answerable": true,
+      "expected_source": "apex_bank_commercial_loan_agreement.pdf",
+      "expected_page": 1,
+      "generated_answer": "The maturity date is March 15, 2027. [Document: apex_bank_commercial_loan_agreement.pdf, Page: 1]",
+      "insufficient_evidence": false,
+      "source_hit": true,
+      "page_hit": true,
+      "refusal_correct": null,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_fee_schedule.pdf"
+      ],
+      "retrieved_pages": [
+        1,
+        3,
+        2,
+        2
+      ],
+      "adjacent_pages": [
+        1
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1866,
+        "completion_tokens": 167,
+        "total_tokens": 2033
+      }
+    },
+    {
+      "id": "q09",
+      "question": "By how much does the interest rate increase upon an Event of Default under the commercial credit agreement?",
+      "answerable": true,
+      "expected_source": "apex_bank_commercial_loan_agreement.pdf",
+      "expected_page": 1,
+      "generated_answer": "The interest rate increases by 300 basis points (3.00%) upon an Event of Default [Document: apex_bank_commercial_loan_agreement.pdf, Page: 1].",
+      "insufficient_evidence": false,
+      "source_hit": true,
+      "page_hit": true,
+      "refusal_correct": null,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_fee_schedule.pdf"
+      ],
+      "retrieved_pages": [
+        3,
+        1,
+        2,
+        2
+      ],
+      "adjacent_pages": [
+        1
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1871,
+        "completion_tokens": 238,
+        "total_tokens": 2109
+      }
+    },
+    {
+      "id": "q10",
+      "question": "What is the minimum consolidated Debt Service Coverage Ratio (DSCR) requirement for Meridian Logistics, and how often is it measured?",
+      "answerable": true,
+      "expected_source": "apex_bank_commercial_loan_agreement.pdf",
+      "expected_page": 2,
+      "generated_answer": "I cannot find sufficient evidence in the uploaded documents to answer this question.",
+      "insufficient_evidence": true,
+      "source_hit": true,
+      "page_hit": true,
+      "refusal_correct": null,
+      "answer_match": false,
+      "retrieved_sources": [
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_fee_schedule.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        1,
+        3,
+        1
+      ],
+      "adjacent_pages": [
+        2
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1875,
+        "completion_tokens": 663,
+        "total_tokens": 2538
+      }
+    },
+    {
+      "id": "q11",
+      "question": "Are there any prepayment penalties for prepaying SOFR-based advances under the credit facility?",
+      "answerable": true,
+      "expected_source": "apex_bank_commercial_loan_agreement.pdf",
+      "expected_page": 3,
+      "generated_answer": "No. The agreement states the Borrower \"may prepay SOFR-based advances at any time without penalty or premium upon 2 business days written notice.\" [Document: apex_bank_commercial_loan_agreement.pdf, Page: 3]",
+      "insufficient_evidence": false,
+      "source_hit": true,
+      "page_hit": true,
+      "refusal_correct": null,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_fee_schedule.pdf"
+      ],
+      "retrieved_pages": [
+        3,
+        1,
+        2,
+        1
+      ],
+      "adjacent_pages": [
+        2
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1869,
+        "completion_tokens": 250,
+        "total_tokens": 2119
+      }
+    },
+    {
+      "id": "q12",
+      "question": "What is the company 401(k) retirement matching percentage for Apex Bank employees?",
+      "answerable": false,
+      "expected_source": null,
+      "expected_page": null,
+      "generated_answer": "I cannot find sufficient evidence in the uploaded documents to answer this question.",
+      "insufficient_evidence": true,
+      "source_hit": null,
+      "page_hit": null,
+      "refusal_correct": true,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf"
+      ],
+      "retrieved_pages": [
+        1,
+        2,
+        1,
+        2
+      ],
+      "adjacent_pages": [
+        3
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1866,
+        "completion_tokens": 151,
+        "total_tokens": 2017
+      }
+    },
+    {
+      "id": "q13",
+      "question": "What is the current annual interest rate for a 30-year fixed rate residential mortgage?",
+      "answerable": false,
+      "expected_source": null,
+      "expected_page": null,
+      "generated_answer": "I cannot find sufficient evidence in the uploaded documents to answer this question.",
+      "insufficient_evidence": true,
+      "source_hit": null,
+      "page_hit": null,
+      "refusal_correct": true,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_fee_schedule.pdf"
+      ],
+      "retrieved_pages": [
+        1,
+        3,
+        2,
+        1
+      ],
+      "adjacent_pages": [
+        2
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1867,
+        "completion_tokens": 407,
+        "total_tokens": 2274
+      }
+    },
+    {
+      "id": "q14",
+      "question": "What is the annual rental fee for a 10x10 safe deposit box at Apex Bank branches?",
+      "answerable": false,
+      "expected_source": null,
+      "expected_page": null,
+      "generated_answer": "I cannot find sufficient evidence in the uploaded documents to answer this question.",
+      "insufficient_evidence": true,
+      "source_hit": null,
+      "page_hit": null,
+      "refusal_correct": true,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_fee_schedule.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf"
+      ],
+      "retrieved_pages": [
+        1,
+        2,
+        1,
+        3
+      ],
+      "adjacent_pages": [
+        2
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1870,
+        "completion_tokens": 151,
+        "total_tokens": 2021
+      }
+    },
+    {
+      "id": "q15",
+      "question": "What are the personal guarantee requirements and credit score minimums for the CEO of Meridian Logistics?",
+      "answerable": false,
+      "expected_source": null,
+      "expected_page": null,
+      "generated_answer": "I cannot find sufficient evidence in the uploaded documents to answer this question.",
+      "insufficient_evidence": true,
+      "source_hit": null,
+      "page_hit": null,
+      "refusal_correct": true,
+      "answer_match": true,
+      "retrieved_sources": [
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_commercial_loan_agreement.pdf",
+        "apex_bank_fee_schedule.pdf"
+      ],
+      "retrieved_pages": [
+        2,
+        1,
+        3,
+        1
+      ],
+      "adjacent_pages": [
+        2
+      ],
+      "num_primary_chunks": 4,
+      "num_adjacent_chunks": 1,
+      "usage": {
+        "prompt_tokens": 1868,
+        "completion_tokens": 151,
+        "total_tokens": 2019
+      }
+    }
+  ]
+}

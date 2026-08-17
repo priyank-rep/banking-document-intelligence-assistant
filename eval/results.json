@@ -1,6 +1,6 @@
 {
   "summary": {
-    "timestamp": "2026-08-16T18:32:40.954818",
+    "timestamp": "2026-08-17T11:16:27.566806",
     "configuration": {
       "llm_model": "gpt-5-mini",
       "embedding_model": "text-embedding-3-small",
@@ -16,7 +16,7 @@
       "page_hit_rate_pct": 100.0,
       "correct_refusal_rate_pct": 100.0,
       "overall_answer_match_rate_pct": 86.67,
-      "elapsed_seconds": 79.23
+      "elapsed_seconds": 101.46
     }
   },
   "results": [
@@ -44,7 +44,7 @@
         1,
         2
       ],
-      "top_similarity_score": 0.7274,
+      "top_similarity_score": 0.7275,
       "notes": "Direct factual lookup with numeric threshold conditions."
     },
     {
@@ -53,7 +53,7 @@
       "answerable": true,
       "expected_source": "apex_bank_fee_schedule.pdf",
       "expected_page": 1,
-      "generated_answer": "Apex Bank charges $0.00 for a returned unpaid (NSF) item; Apex Bank does not charge fees for items returned unpaid [Document: apex_bank_fee_schedule.pdf, Page: 1].",
+      "generated_answer": "The Returned Item (NSF) Fee is $0.00 \u2014 Apex Bank does not charge fees for items returned unpaid [Document: apex_bank_fee_schedule.pdf, Page: 1].",
       "insufficient_evidence": false,
       "source_hit": true,
       "page_hit": true,
@@ -107,7 +107,7 @@
       "answerable": true,
       "expected_source": "apex_bank_fee_schedule.pdf",
       "expected_page": 2,
-      "generated_answer": "The cutoff time for same-day processing of domestic wire transfers is 4:30 PM Eastern Time [Document: apex_bank_fee_schedule.pdf, Page: 2].",
+      "generated_answer": "The cutoff time for same-day processing of domestic wire transfers is 4:30 PM Eastern Time. [Document: apex_bank_fee_schedule.pdf, Page: 2]",
       "insufficient_evidence": false,
       "source_hit": true,
       "page_hit": true,
@@ -134,7 +134,7 @@
       "answerable": true,
       "expected_source": "apex_bank_fee_schedule.pdf",
       "expected_page": 2,
-      "generated_answer": "Outgoing Domestic Wire (Online Banking): $20.00 per transfer; Outgoing Domestic Wire (Branch Assisted): $35.00 per transfer [Document: apex_bank_fee_schedule.pdf, Page: 2].",
+      "generated_answer": "Outgoing Domestic Wire (Online Banking): $20.00 per transfer [Document: apex_bank_fee_schedule.pdf, Page: 2].\n\nOutgoing Domestic Wire (Branch Assisted): $35.00 per transfer [Document: apex_bank_fee_schedule.pdf, Page: 2].",
       "insufficient_evidence": false,
       "source_hit": true,
       "page_hit": true,
@@ -206,7 +206,7 @@
         3,
         2
       ],
-      "top_similarity_score": 0.7015,
+      "top_similarity_score": 0.7016,
       "notes": "Entity-specific credit commitment limit."
     },
     {
@@ -215,7 +215,7 @@
       "answerable": true,
       "expected_source": "apex_bank_commercial_loan_agreement.pdf",
       "expected_page": 1,
-      "generated_answer": "The maturity date is March 15, 2027 (36 months from execution date) [Document: apex_bank_commercial_loan_agreement.pdf, Page: 1].",
+      "generated_answer": "The maturity date is March 15, 2027 [Document: apex_bank_commercial_loan_agreement.pdf, Page: 1].",
       "insufficient_evidence": false,
       "source_hit": true,
       "page_hit": true,
@@ -242,7 +242,7 @@
       "answerable": true,
       "expected_source": "apex_bank_commercial_loan_agreement.pdf",
       "expected_page": 1,
-      "generated_answer": "The interest rate increases by 300 basis points (3.00% per annum) upon an Event of Default [Document: apex_bank_commercial_loan_agreement.pdf, Page: 1].",
+      "generated_answer": "The interest rate increases by 300 basis points (3.00%) upon an Event of Default [Document: apex_bank_commercial_loan_agreement.pdf, Page: 1].",
       "insufficient_evidence": false,
       "source_hit": true,
       "page_hit": true,
@@ -260,7 +260,7 @@
         2,
         2
       ],
-      "top_similarity_score": 0.5286,
+      "top_similarity_score": 0.5283,
       "notes": "Default interest margin lookup."
     },
     {
@@ -296,7 +296,7 @@
       "answerable": true,
       "expected_source": "apex_bank_commercial_loan_agreement.pdf",
       "expected_page": 3,
-      "generated_answer": "No. The agreement states the borrower may prepay SOFR-based advances at any time without penalty or premium, provided 2 business days' written notice is given [Document: apex_bank_commercial_loan_agreement.pdf, Page: 3].",
+      "generated_answer": "No. The agreement states the Borrower may prepay SOFR-based advances at any time without penalty or premium upon 2 business days' written notice [Document: apex_bank_commercial_loan_agreement.pdf, Page: 3].",
       "insufficient_evidence": false,
       "source_hit": true,
       "page_hit": true,
@@ -314,7 +314,7 @@
         2,
         1
       ],
-      "top_similarity_score": 0.649,
+      "top_similarity_score": 0.6489,
       "notes": "Prepayment terms and notice window."
     },
     {

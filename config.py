@@ -61,6 +61,27 @@ RETRIEVAL_TOP_K = int(os.getenv("RETRIEVAL_TOP_K", 4))
 CHROMA_COLLECTION_NAME = "banking_documents"
 
 # ==============================================================================
+# PDF Ingestion & Layout Configuration
+# ==============================================================================
+# When True, uses PyMuPDF block coordinate extraction and removes top/bottom header/footer noise
+PDF_FILTER_HEADERS_FOOTERS = os.getenv("PDF_FILTER_HEADERS_FOOTERS", "true").lower() == "true"
+
+# Top header margin threshold in points (blocks whose bottom boundary y1 <= margin are classified as headers)
+PDF_HEADER_MARGIN_PT = float(os.getenv("PDF_HEADER_MARGIN_PT", 50.0))
+
+# Bottom footer margin threshold in points (blocks whose top boundary y0 >= page_height - margin are classified as footers)
+PDF_FOOTER_MARGIN_PT = float(os.getenv("PDF_FOOTER_MARGIN_PT", 50.0))
+
+# ==============================================================================
+# Adjacent-Page Context Augmentation Parameters
+# ==============================================================================
+# When True, supplements primary retrieved chunks with immediate neighboring pages (N-1, N+1) from the same document
+ENABLE_ADJACENT_CONTEXT = os.getenv("ENABLE_ADJACENT_CONTEXT", "false").lower() == "true"
+
+# Maximum number of adjacent supporting chunks to attach per query
+MAX_ADJACENT_CHUNKS = int(os.getenv("MAX_ADJACENT_CHUNKS", 2))
+
+# ==============================================================================
 # API Key Helper
 # ==============================================================================
 def get_openai_api_key() -> str:

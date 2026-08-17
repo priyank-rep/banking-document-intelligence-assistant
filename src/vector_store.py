@@ -233,10 +233,108 @@ def query_vector_store(
                 "chunk_text": docs_list[i],
                 "token_count": metas_list[i].get("token_count", 0),
                 "distance": round(float(cosine_dist), 4),
-                "similarity_score": round(float(sim_score), 4)
+                "similarity_score": round(float(sim_score), 4),
+                "retrieval_role": "primary"
             })
 
     return retrieved_chunks
+
+
+# ==============================================================================
+# Adjacent-Page Context Augmentation
+# ==============================================================================
+
+def get_adjacent_chunks(
+    primary_chunks: List[Dict[str, Any]],
+    collection: Optional[chromadb.Collection] = None,
+    max_adjacent_chunks: int = config.MAX_ADJACENT_CHUNKS
+) -> List[Dict[str, Any]]:
+    """
+    Retrieve immediately adjacent page chunks (N-1, N+1) from the SAME document
+    to resolve cross-page coreference (e.g. definitions on Page 1, covenants on Page 2).
+
+    Rules:
+    1. Only fetch neighboring pages from the EXACT SAME source document.
+    2. Never duplicate chunks that are already in primary_chunks.
+    3. Respect max_adjacent_chunks limit to avoid context bloating.
+    4. Explicitly tag every returned chunk with retrieval_role="adjacent".
+    5. Preserve original distance/similarity as None (they are supporting context, not search hits).
+    """
+    if not primary_chunks or max_adjacent_chunks <= 0:
+        return []
+
+    target_collection = collection or get_or_create_collection()
+    primary_chunk_ids = {c["chunk_id"] for c in primary_chunks}
+    added_chunk_ids = set()
+    adjacent_chunks = []
+
+    # Map of documents to their fetched collection items to avoid repeated DB calls
+    doc_cache: Dict[str, Dict[str, Any]] = {}
+
+    for p_chunk in primary_chunks:
+        if len(adjacent_chunks) >= max_adjacent_chunks:
+            break
+
+        source = p_chunk.get("source")
+        page = p_chunk.get("page")
+        if not source or not isinstance(page, int):
+            continue
+
+        # Fetch all chunks for this source document if not already cached
+        if source not in doc_cache:
+            try:
+                doc_data = target_collection.get(
+                    where={"source": {"$eq": source}},
+                    include=["documents", "metadatas"]
+                )
+                doc_cache[source] = doc_data
+            except Exception as e:
+                logger.warning(f"Failed to query adjacent chunks for source {source}: {e}")
+                continue
+
+        doc_data = doc_cache[source]
+        if not doc_data or not doc_data.get("ids"):
+            continue
+
+        candidate_pages = []
+        # Page N-1 (preceding page, e.g. definitions/preamble)
+        if page > 1:
+            candidate_pages.append((page - 1, f"Preceding Page {page - 1} of {source}"))
+        # Page N+1 (following page, e.g. schedules/attachments)
+        candidate_pages.append((page + 1, f"Following Page {page + 1} of {source}"))
+
+        ids = doc_data["ids"]
+        docs = doc_data["documents"]
+        metas = doc_data["metadatas"]
+
+        for cand_page, relation_desc in candidate_pages:
+            if len(adjacent_chunks) >= max_adjacent_chunks:
+                break
+
+            for idx, cid in enumerate(ids):
+                if len(adjacent_chunks) >= max_adjacent_chunks:
+                    break
+
+                meta = metas[idx]
+                chunk_page = meta.get("page", 0)
+
+                if chunk_page == cand_page:
+                    if cid not in primary_chunk_ids and cid not in added_chunk_ids:
+                        added_chunk_ids.add(cid)
+                        adjacent_chunks.append({
+                            "chunk_id": cid,
+                            "source": source,
+                            "page": chunk_page,
+                            "chunk_text": docs[idx],
+                            "token_count": meta.get("token_count", 0),
+                            "distance": None,
+                            "similarity_score": None,
+                            "retrieval_role": "adjacent",
+                            "adjacent_to_page": page,
+                            "relationship": relation_desc
+                        })
+
+    return adjacent_chunks
 
 
 # ==============================================================================
